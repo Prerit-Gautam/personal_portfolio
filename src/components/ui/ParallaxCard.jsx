@@ -22,7 +22,7 @@ const stockImages = [
   { src: img8, alt: 'Project view 8' },
 ];
 
-const ParallaxCard = ({ i, title, subtitle, tag, description, achievements, githubUrl, color, progress, range, targetScale, images }) => {
+const ParallaxCard = ({ i, title, subtitle, tag, description, achievements, githubUrl, color, progress, range, targetScale, images, hidePhone }) => {
   const container = useRef(null);
 
   // Scale the entire card down as we scroll past it
@@ -39,7 +39,7 @@ const ParallaxCard = ({ i, title, subtitle, tag, description, achievements, gith
         }}
       >
         {/* Left Content Area */}
-        <div className="w-full md:w-1/2 flex flex-col justify-between h-full pr-0 md:pr-8 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className={`w-full ${hidePhone ? '' : 'md:w-1/2'} flex flex-col justify-between h-full pr-0 ${hidePhone ? '' : 'md:pr-8'} overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}>
           <div>
             <span className="inline-block px-3 py-1 rounded-full border border-primary/20 text-xs font-semibold uppercase tracking-widest text-primary mb-4">
               {tag.replace('-', ' ')}
@@ -76,44 +76,46 @@ const ParallaxCard = ({ i, title, subtitle, tag, description, achievements, gith
         </div>
 
         {/* Right Phone Mockup Area */}
-        <div className="w-full md:w-1/2 h-full hidden md:flex items-center justify-center relative mt-8 md:mt-0">
-          {/* Background ambient light */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-primary/20 blur-[80px] rounded-full pointer-events-none"></div>
+        {!hidePhone && (
+          <div className="w-full md:w-1/2 h-full hidden md:flex items-center justify-center relative mt-8 md:mt-0">
+            {/* Background ambient light */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-primary/20 blur-[80px] rounded-full pointer-events-none"></div>
 
-          {/* Mobile Phone Mockup */}
-          <div className="relative z-10 w-[280px] h-[550px] bg-surface rounded-[2.5rem] border-[6px] border-gray-900 shadow-2xl overflow-hidden ring-1 ring-white/10 shrink-0">
-            {/* Notch / Dynamic Island */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-gray-900 rounded-b-2xl z-20 flex justify-center items-center">
-              <div className="w-1.5 h-1.5 rounded-full bg-black/50 border border-white/10 ml-8"></div>
-            </div>
+            {/* Mobile Phone Mockup */}
+            <div className="relative z-10 w-[280px] h-[550px] bg-surface rounded-[2.5rem] border-[6px] border-gray-900 shadow-2xl overflow-hidden ring-1 ring-white/10 shrink-0">
+              {/* Notch / Dynamic Island */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-gray-900 rounded-b-2xl z-20 flex justify-center items-center">
+                <div className="w-1.5 h-1.5 rounded-full bg-black/50 border border-white/10 ml-8"></div>
+              </div>
 
-            {/* Slider Container */}
-            <div className="w-full h-full flex overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-              {(images || stockImages).map((image, idx) => (
-                <div key={idx} className="min-w-full h-full snap-center relative">
-                  <img
-                    src={image.src}
-                    alt={image.alt || `Project view ${idx + 1}`}
-                    className="w-full h-full object-cover pointer-events-none"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+              {/* Slider Container */}
+              <div className="w-full h-full flex overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                {(images || stockImages).map((image, idx) => (
+                  <div key={idx} className="min-w-full h-full snap-center relative">
+                    <img
+                      src={image.src}
+                      alt={image.alt || `Project view ${idx + 1}`}
+                      className="w-full h-full object-cover pointer-events-none"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
 
-                  {/* Paging dots */}
-                  <div className="absolute bottom-6 left-0 right-0 flex justify-center pointer-events-none">
-                    <div className="flex gap-1.5 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full">
-                      {(images || stockImages).map((_, dotIdx) => (
-                        <div key={dotIdx} className={`w-1.5 h-1.5 rounded-full transition-colors ${idx === dotIdx ? 'bg-primary' : 'bg-white/30'}`}></div>
-                      ))}
+                    {/* Paging dots */}
+                    <div className="absolute bottom-6 left-0 right-0 flex justify-center pointer-events-none">
+                      <div className="flex gap-1.5 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full">
+                        {(images || stockImages).map((_, dotIdx) => (
+                          <div key={dotIdx} className={`w-1.5 h-1.5 rounded-full transition-colors ${idx === dotIdx ? 'bg-primary' : 'bg-white/30'}`}></div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            {/* Home indicator (bottom bar) */}
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-white/40 rounded-full z-20 pointer-events-none"></div>
+              {/* Home indicator (bottom bar) */}
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-white/40 rounded-full z-20 pointer-events-none"></div>
+            </div>
           </div>
-        </div>
+        )}
       </motion.div>
     </div>
   );

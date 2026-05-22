@@ -35,7 +35,7 @@ const projectsData = [
       'Implemented the Haversine formula to efficiently calculate the distance between the user and blood banks.',
       'Optimized the query pipeline to filter by blood group availability and sort by proximity.'
     ],
-    githubUrl: 'https://github.com/preritgautam/',
+    githubUrl: 'https://github.com/Prerit-Gautam',
     color: '#1a1a1a'
   },
   {
@@ -50,7 +50,7 @@ const projectsData = [
       'Successfully delivered a working, deployed prototype within a strict 24-hour deadline.',
       'Deployed the frontend to Vercel and the backend to Render.'
     ],
-    githubUrl: 'https://github.com/preritgautam/',
+    githubUrl: 'https://github.com/Prerit-Gautam',
     color: '#222222',
     images: pahiloPahilaImages
   },
@@ -64,8 +64,9 @@ const projectsData = [
       'Implemented real-time database updates for posts, likes, and comments.',
       'Designed a user-friendly interface for browsing and interacting with content.'
     ],
-    githubUrl: 'https://github.com/preritgautam/',
-    color: '#1a1a1a'
+    githubUrl: 'https://github.com/Prerit-Gautam',
+    color: '#1a1a1a',
+    hidePhone: true
   },
   {
     title: 'Typ Mask',
@@ -77,8 +78,9 @@ const projectsData = [
       'Leveraged Firebase to handle unstructured data securely without user accounts.',
       'Created a threaded comment system to facilitate discussions.'
     ],
-    githubUrl: 'https://github.com/preritgautam/',
-    color: '#222222'
+    githubUrl: 'https://github.com/Prerit-Gautam',
+    color: '#222222',
+    hidePhone: true
   }
 ];
 
