@@ -14,10 +14,6 @@ const HeroSection = () => {
           transition={{ duration: 0.5 }}
           className="max-w-3xl md:w-2/3"
         >
-          <div className="flex items-center gap-2 mb-8">
-            <span className="text-sm font-medium text-textSecondary uppercase tracking-wider">Available for work</span>
-          </div>
-
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-textPrimary leading-tight mb-8">
             A full stack dev who builds <HandWrittenTitle title="scalable" /> and production-ready systems.
           </h1>
@@ -26,9 +22,6 @@ const HeroSection = () => {
           <div className="flex flex-wrap items-center gap-4">
             <a href="#contact" className="px-6 py-3 bg-primary text-white font-medium rounded-full hover:bg-accent transition-colors flex items-center gap-2">
               Let's talk <ArrowUpRight size={18} />
-            </a>
-            <a href="#" className="px-6 py-3 bg-surface text-textPrimary font-medium rounded-full hover:bg-gray-800 transition-colors flex items-center gap-2 border border-gray-800">
-              Résumé <ArrowUpRight size={18} />
             </a>
           </div>
         </motion.div>
