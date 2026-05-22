@@ -9,17 +9,33 @@ const ContactFooter = () => {
     subject: '',
     message: ''
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | loading | success | error
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setStatus('loading');
+    try {
+      const res = await fetch('https://formspree.io/f/xwvzodyl', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('error');
+        setTimeout(() => setStatus('idle'), 4000);
+      }
+    } catch {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 4000);
+    }
   };
 
   return (
@@ -117,11 +133,21 @@ const ContactFooter = () => {
 
               <button
                 type="submit"
-                className="w-full sm:w-auto px-8 py-3.5 bg-white text-primary font-semibold rounded-full hover:bg-gray-100 transition-colors flex items-center justify-center gap-2 group"
+                disabled={status === 'loading'}
+                className="w-full sm:w-auto px-8 py-3.5 bg-white text-primary font-semibold rounded-full hover:bg-gray-100 transition-colors flex items-center justify-center gap-2 group disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {submitted ? (
-                  <>Message sent! ✓</>
-                ) : (
+                {status === 'loading' && (
+                  <>
+                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                    </svg>
+                    Sending…
+                  </>
+                )}
+                {status === 'success' && <>Message sent! ✓</>}
+                {status === 'error' && <>Failed to send. Try again.</>}
+                {status === 'idle' && (
                   <>
                     Send message <Send size={16} className="group-hover:translate-x-1 transition-transform" />
                   </>
