@@ -22,7 +22,7 @@ const stockImages = [
   { src: img8, alt: 'Project view 8' },
 ];
 
-const ParallaxCard = ({ i, title, subtitle, tag, description, achievements, githubUrl, color, progress, range, targetScale }) => {
+const ParallaxCard = ({ i, title, subtitle, tag, description, achievements, githubUrl, color, progress, range, targetScale, images }) => {
   const container = useRef(null);
 
   // Scale the entire card down as we scroll past it
@@ -41,8 +41,8 @@ const ParallaxCard = ({ i, title, subtitle, tag, description, achievements, gith
         {/* Left Content Area */}
         <div className="w-full md:w-1/2 flex flex-col justify-between h-full pr-0 md:pr-8 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           <div>
-            <span className="inline-block px-3 py-1 rounded-full bg-background/50 border border-white/10 text-xs font-mono text-textSecondary mb-4">
-              {tag}
+            <span className="inline-block px-3 py-1 rounded-full border border-primary/20 text-xs font-semibold uppercase tracking-widest text-primary mb-4">
+              {tag.replace('-', ' ')}
             </span>
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-2 text-textPrimary">{title}</h2>
             <div className="text-primary font-medium mb-6">{subtitle}</div>
@@ -89,11 +89,11 @@ const ParallaxCard = ({ i, title, subtitle, tag, description, achievements, gith
 
             {/* Slider Container */}
             <div className="w-full h-full flex overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-              {stockImages.map((image, idx) => (
+              {(images || stockImages).map((image, idx) => (
                 <div key={idx} className="min-w-full h-full snap-center relative">
                   <img
                     src={image.src}
-                    alt={image.alt}
+                    alt={image.alt || `Project view ${idx + 1}`}
                     className="w-full h-full object-cover pointer-events-none"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
@@ -101,7 +101,7 @@ const ParallaxCard = ({ i, title, subtitle, tag, description, achievements, gith
                   {/* Paging dots */}
                   <div className="absolute bottom-6 left-0 right-0 flex justify-center pointer-events-none">
                     <div className="flex gap-1.5 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full">
-                      {stockImages.map((_, dotIdx) => (
+                      {(images || stockImages).map((_, dotIdx) => (
                         <div key={dotIdx} className={`w-1.5 h-1.5 rounded-full transition-colors ${idx === dotIdx ? 'bg-primary' : 'bg-white/30'}`}></div>
                       ))}
                     </div>

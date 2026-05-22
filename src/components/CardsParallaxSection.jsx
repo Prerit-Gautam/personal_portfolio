@@ -2,6 +2,26 @@ import React, { useRef, useEffect } from 'react';
 import { useScroll } from 'framer-motion';
 import ParallaxCard from './ui/ParallaxCard';
 
+import pp1 from '../assets/pahilo_pahila_1.png';
+import pp2 from '../assets/pahilo_pahila_2.png';
+import pp3 from '../assets/pahilo_pahila_3.png';
+import pp4 from '../assets/pahilo_pahila_4.png';
+import pp5 from '../assets/pahilo_pahila_5.png';
+import pp6 from '../assets/pahilo_pahila_6.png';
+import pp7 from '../assets/pahilo_pahila_7.png';
+import pp8 from '../assets/pahilo_pahila_8.png';
+
+const pahiloPahilaImages = [
+  { src: pp1, alt: 'Pahilo Pahila 1' },
+  { src: pp2, alt: 'Pahilo Pahila 2' },
+  { src: pp3, alt: 'Pahilo Pahila 3' },
+  { src: pp4, alt: 'Pahilo Pahila 4' },
+  { src: pp5, alt: 'Pahilo Pahila 5' },
+  { src: pp6, alt: 'Pahilo Pahila 6' },
+  { src: pp7, alt: 'Pahilo Pahila 7' },
+  { src: pp8, alt: 'Pahilo Pahila 8' },
+];
+
 const projectsData = [
   {
     title: 'RaktaSewa',
@@ -31,7 +51,8 @@ const projectsData = [
       'Deployed the frontend to Vercel and the backend to Render.'
     ],
     githubUrl: 'https://github.com/preritgautam/',
-    color: '#222222'
+    color: '#222222',
+    images: pahiloPahilaImages
   },
   {
     title: 'Typ Social',
